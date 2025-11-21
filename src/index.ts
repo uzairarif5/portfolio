@@ -7,40 +7,14 @@ const __dirname = path.dirname(__filename)
 
 const app = express();
 
-// Home route - HTML
-app.get('/', (req, res) => {
-  res.type('html').send(`
-    <!doctype html>
-    <html>
-      <head>
-        <meta charset="utf-8"/>
-        <title>Express on Vercel</title>
-        <link rel="stylesheet" href="/style.css" />
-      </head>
-      <body>
-        <h1>Welcome to Express on Vercel 🚀 Woo!</h1>
-        <p>This is a minimal example without a database or forms.</p>
-        <img src="/logo.png" alt="Logo" width="120" />
-      </body>
-    </html>
-  `)
+app.use(express.static('public'));
+
+app.get('/', function (req, res) {
+  res.sendFile(path.join(__dirname, '..', 'components', 'home.html'));
 });
 
-app.get('/about', function (req, res) {
-  res.sendFile(path.join(__dirname, '..', 'components', 'about.html'));
-});
-
-// Example API endpoint - JSON
-app.get('/api-data', (req, res) => {
-  res.json({
-    message: 'Here is some sample API data',
-    items: ['apple', 'banana', 'cherry'],
-  });
-});
-
-// Health check
-app.get('/healthz', (req, res) => {
-  res.status(200).json({ status: 'ok', timestamp: new Date().toISOString() });
+app.get('/info,json', function (req, res) {
+  res.sendFile('/info.json');
 });
 
 export default app;

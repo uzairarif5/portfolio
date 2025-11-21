@@ -1,0 +1,271 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Uzair Arif's portfolio</title>
+    <link rel="stylesheet" href="/style.css" />
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="prefetch" href="/fog1.png" as="image">
+  </head>
+  <body>
+    <header>
+      <img src="/fog1.png" alt="" id="bgImage"/>
+      <div class="h1Border"></div>
+      <h1>Uzair Arif</h1>
+      <div class="h1Border"></div>
+      <img src="/fog1.png" alt="" class="fogImg"/>
+      <img src="/fog1.png" alt="" class="fogImg"/>
+    </header>
+    <main>
+      <div id="mainScreen">
+        <div id="screenText">
+          Uzair Arif,<br/>
+          <span></span><br style="display: none;"/><span></span>
+          <span class="caret">█</span>
+          <span style="opacity: 0;">A hobbyist programmer who enjoys experimenting with new architectures and ideas, with the emphasis on high performance with minimal complexity.</span><br/>
+          <span style="opacity: 0;">Most to least liked languages: C, Python, TypeScript, Java, C++, R.</span>
+          <div id="bottomMainScreen">
+            <button type="button" title="Show work experience" onclick="showWorkExp()">[Work Experience]</button>
+            <button type="button" title="Add email to clipboard" onclick="wantEmail(event)">[Get Email]</button>
+          </div>
+        </div>
+      </div>
+      <div id="middleContent">
+        <div id="floor"></div>
+        <div id="leftWall"></div>
+        <div id="rightWall"></div>
+        <div id="tvContainer">
+          <div id="tvDiv">
+            <div id="tvScreenDiv">
+              <div id="scanlineContainer"><img src="/tvGifs/static.gif" alt="" id="tvGif"/></div>
+            </div>
+          </div>
+        </div>
+        <div id="projectsContainer">
+          <div id="buttonsContainer"></div>
+        </div>
+        <div id="infoScreen">
+          <div id="infoScreenInner">
+            <div id="infoScreenTitleContainer">
+              <a target="_blank" id="infoScreenLink">[Github]</a>
+              <h2 id="infoScreenTitle"></h2>
+              <button type="button" onclick="closeInfoScreen()">[ESC]</button>
+            </div>
+            <div id="infoScreenText"></div>
+          </div>
+        </div>
+      </div>
+      <div id="textPopUp"></div>
+    </main>
+    <footer>
+      <a target="_blank" title="linkedin" href="https://www.linkedin.com/in/uzair0845/">
+        <div class="mask" style="mask-image: url(/footer_pics/linkedin_logo.png);"></div>
+      </a>
+      <a target="_blank" title="github" href="https://github.com/uzairarif5">
+        <div class="mask" style="mask-image: url(/footer_pics/github_logo.png);animation-delay: 2s;"></div>
+      </a>
+      <a target="_blank" title="leetcode" href="https://leetcode.com/u/mysterious_person/">
+        <div class="mask" style="mask-image: url(/footer_pics/leetcode_logo.png);animation-delay: 1s;"></div>
+      </a>
+    </footer>
+  </body>
+  <script>
+    var g_counterForHideHeader = 2;
+    var g_projectGifs = [];
+    var g_workExpInfo;
+    var g_infoScreenInfo = [null, null, null, null];
+    var g_textPopUpInfo = [null, null];
+    var g_tvGif;
+    var g_tvGifImgHolder;
+    var g_projectsInfo;
+    var g_particleStore = [];
+
+    window.onload = () => {
+      window.setTimeout(showFogDiv, 1);
+      window.setTimeout(showH1, 500);
+      g_tvGif = document.getElementById("tvGif");
+      g_tvGifImgHolder = new Image();
+      g_tvGifImgHolder.src = "/tvGifs/static.gif";
+      g_textPopUpInfo[0] = document.getElementById("textPopUp");
+      g_infoScreenInfo = [
+        document.getElementById("infoScreen"),
+        document.getElementById("infoScreenLink"),
+        document.getElementById("infoScreenTitle"),
+        document.getElementById("infoScreenText")
+      ];
+
+      fetch("/info.json")
+      .then(res => res.json())
+      .then(res => {
+        g_projectsInfo = res["projects"];
+        g_workExpInfo = res["WorkExperienceInfo"];
+        document.getElementById("bottomMainScreen").classList.add("visible");
+        addButtonsToMain();
+        g_counterForHideHeader -= 1;
+        hideHeader();
+      });
+
+      document.onkeydown = (event) => {
+        if (event.keyCode === 27) closeInfoScreen();
+      }
+    }
+
+    function showFogDiv() {
+      const fogImgs = document.querySelectorAll(".fogImg");
+      fogImgs[0].style.opacity = 0.05;
+      fogImgs[0].classList.add("goLeft");
+      fogImgs[1].style.opacity = 0.05;
+      fogImgs[1].classList.add("goRight");
+    }
+
+    function showH1() {
+      const h1El = document.querySelector("h1");
+      h1El.style.opacity = 1;
+      h1El.style.transform = "scale(1.75, 1.75)";
+      for(let h1border of document.getElementsByClassName("h1Border")) {
+        h1border.style.opacity = 1;
+        h1border.style.width = "300px";
+      }
+      window.setTimeout(() => {
+        g_counterForHideHeader -= 1;
+        hideHeader();
+      }, 3500);
+    }
+
+    function hideHeader(){
+      if (g_counterForHideHeader) return;
+      const headerEl = document.querySelector("header");
+      headerEl.style.opacity = 0;
+      document.body.style.overflowY = "auto";
+      window.setTimeout(() => {
+        headerEl.remove();
+        showMainScreenText();
+      }, 2000);
+    }
+
+    function showWorkExp(){
+      g_infoScreenInfo[1].removeAttribute("href");
+      g_infoScreenInfo[2].textContent = "Work Experience";
+      g_infoScreenInfo[3].innerHTML = g_workExpInfo;
+      g_infoScreenInfo[0].classList.add("visible");
+    }
+
+    function wantEmail(event){
+      navigator.clipboard.writeText("uzair.99@hotmail.com");
+      showTextPopUp("Email copied to clipboard", event.clientX, event.clientY);
+    }
+
+    function addButtonsToMain(){
+      const buttonsContainer = document.getElementById("buttonsContainer");
+
+      const filler1 = document.createElement("div");
+      filler1.classList.add("filler");
+      buttonsContainer.appendChild(filler1);
+      
+      for (let i = 0; i < g_projectsInfo.length; i++) {
+        let buttonEl = document.createElement("button");
+        buttonEl.type = "button";
+        buttonEl.textContent = g_projectsInfo[i][0];
+        if (g_projectsInfo[i].length > 1) {
+          g_projectGifs.push(new Image());
+          g_projectGifs[i].src = `/tvGifs/${g_projectsInfo[i][1]}`;
+          buttonEl.onmouseenter = () => mouseEnteredButton(i);
+          buttonEl.onmouseleave = () => g_tvGif.src = g_tvGifImgHolder.src;
+          if (g_projectsInfo[i].length === 4) buttonEl.onclick = () => buttonClicked(i);
+        }
+        buttonsContainer.appendChild(buttonEl);
+      }
+      
+      const filler2 = document.createElement("div");
+      filler2.classList.add("filler");
+      buttonsContainer.appendChild(filler2);
+
+      document.getElementById("buttonsContainer").style.pointerEvents = "all";
+    }
+
+    function mouseEnteredButton(i) { 
+      if(g_tvGif.src !== g_projectGifs[i].src) g_tvGif.src = g_projectGifs[i].src; 
+    }
+
+    function buttonClicked(i) {
+      g_infoScreenInfo[1].setAttribute("href", g_projectsInfo[i][3]);
+      g_infoScreenInfo[2].textContent = g_projectsInfo[i][0];
+      g_infoScreenInfo[3].innerHTML = g_projectsInfo[i][2];
+      g_infoScreenInfo[0].classList.add("visible");
+    }
+
+    function closeInfoScreen(){ g_infoScreenInfo[0].classList.remove("visible"); }
+
+    function showMainScreenText(){
+      const screenSpans = document.querySelectorAll("#screenText span");
+      const screenBrs = document.querySelectorAll("#screenText br");
+      const toSpan1 = screenSpans[0];
+      const toSpan2 = screenSpans[1];
+      const fromSpan1 = screenSpans[3];
+      const fromSpan2 = screenSpans[4];
+      const caretEl = screenSpans[2];
+      caretEl.classList.remove("caret");
+      let completingFirst = true;
+      const textInt = window.setInterval(() => {
+        if (fromSpan1.textContent) {
+          toSpan1.innerHTML += fromSpan1.textContent.charAt(0);
+          fromSpan1.textContent = fromSpan1.textContent.slice(1);
+        }
+        else if (completingFirst) { //switch displays of two brs
+          completingFirst = false;
+          screenBrs[2].style.display = "none";
+          screenBrs[1].style.display = "block";
+        }
+        else if (fromSpan2.textContent) {
+          toSpan2.innerHTML += fromSpan2.textContent.charAt(0);
+          fromSpan2.textContent = fromSpan2.textContent.slice(1);
+        }
+        else {
+          clearInterval(textInt);
+          caretEl.classList.add("caret");
+        }
+      }, 10);
+
+      window.setTimeout(() => {
+        document.getElementById("scanlineContainer").style.opacity = "1";
+        addGlowParticlesToFooterButton();
+      }, 1500);
+    }
+
+    function addGlowParticlesToFooterButton(){
+      const footerLinks = document.querySelectorAll("footer a");
+      const maxParsPerLink = 4;
+      let flIdx;
+      let prIdx;
+      for(flIdx = 0; flIdx < footerLinks.length; flIdx++) {
+        g_particleStore.push([]);
+        for(prIdx = 0; prIdx < maxParsPerLink; prIdx++){
+          let newParticle = document.createElement("div");
+          newParticle.classList.add("particle");
+          footerLinks[flIdx].appendChild(newParticle);
+          g_particleStore[flIdx].push(newParticle);
+        }
+      }
+      flIdx = 0;
+      prIdx = 0;
+      window.setInterval(() => {
+        g_particleStore[flIdx][prIdx].style.left = `${Math.random() * 40}px`;
+        g_particleStore[flIdx][prIdx].classList.add("particleUp");
+        window.setTimeout(() => g_particleStore[flIdx][prIdx].classList.remove("particleUp"), 3100);
+        prIdx = (prIdx+1) % maxParsPerLink;
+        flIdx = (flIdx+1) % footerLinks.length;
+      }, 500);
+    }
+
+    function showTextPopUp(text, x, y){
+      if (g_textPopUpInfo[1]) clearTimeout(g_textPopUpInfo[1]);
+      let textPopEl = g_textPopUpInfo[0];
+      textPopEl.textContent = text;
+      textPopEl.style.left = `${x}px`;
+      textPopEl.style.top = `${y-22}px`;
+      textPopEl.style.opacity = 1;
+      g_textPopUpInfo[1] = window.setTimeout(()=> textPopEl.style.opacity = 0, 1500);
+    }
+  </script>
+</html>
