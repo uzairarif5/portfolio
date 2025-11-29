@@ -213,7 +213,7 @@ body{
         border-bottom: var(--header-color) solid 1px;
         transform-style: preserve-3d;
         background-color: #00020d;
-        background-image: url('/fog1.png');
+        background-image: url(./fog1.png);
         background-size: 150% 150%;
         background-position: center;
         background-blend-mode: soft-light;
@@ -260,7 +260,7 @@ body{
         #tvDiv{
           border-left: solid black 5px;
           border-bottom: solid black 2px;
-          background-image: url(/fog1.png);
+          background-image: url(./fog1.png);
           background-size: 150% 150%;
           background-position: center;
           background-blend-mode: overlay;
@@ -268,7 +268,7 @@ body{
           display: flex;
           justify-content: center;
           align-items: center;
-          background-color: rgb(10, 15, 35);
+          background-color: rgb(10, 12, 25);
           border-radius: 10px;
           padding: 15px;
           transform-style: preserve-3d;
@@ -411,8 +411,8 @@ body{
         #infoScreenInner{
           color: var(--text-color);
           font-family: "Aleo";
-          font-size: 18px;
-          line-height: 26px;
+          font-size: 16px;
+          line-height: 25px;
           left: 0;
           top: 0;
           position: absolute;

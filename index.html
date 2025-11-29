@@ -4,18 +4,18 @@
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Uzair Arif's portfolio</title>
-    <link rel="stylesheet" href="/style.css" />
-    <link rel="icon" type="image/x-icon" href="/favicon.ico">
-    <link rel="prefetch" href="/fog1.png" as="image">
+    <link rel="stylesheet" href="./public/style.css" />
+    <link rel="icon" type="image/x-icon" href="./public/favicon.ico">
+    <link rel="prefetch" href="./public/fog1.png" as="image">
   </head>
   <body>
     <header>
-      <img src="/fog1.png" alt="" id="bgImage"/>
+      <img src="./public/fog1.png" alt="" id="bgImage"/>
       <div class="h1Border"></div>
       <h1>Uzair Arif</h1>
       <div class="h1Border"></div>
-      <img src="/fog1.png" alt="" class="fogImg"/>
-      <img src="/fog1.png" alt="" class="fogImg"/>
+      <img src="./public/fog1.png" alt="" class="fogImg"/>
+      <img src="./public/fog1.png" alt="" class="fogImg"/>
     </header>
     <main>
       <div id="mainScreen">
@@ -38,7 +38,7 @@
         <div id="tvContainer">
           <div id="tvDiv">
             <div id="tvScreenDiv">
-              <div id="scanlineContainer"><img src="/tvGifs/static.gif" alt="" id="tvGif"/></div>
+              <div id="scanlineContainer"><img src="./public/tvGifs/static.gif" alt="" id="tvGif"/></div>
             </div>
           </div>
         </div>
@@ -60,13 +60,13 @@
     </main>
     <footer>
       <a target="_blank" title="linkedin" href="https://www.linkedin.com/in/uzair0845/">
-        <div class="mask" style="mask-image: url(/footer_pics/linkedin_logo.png);"></div>
+        <div class="mask" style="mask-image: url(./public/footer_pics/linkedin_logo.png);"></div>
       </a>
       <a target="_blank" title="github" href="https://github.com/uzairarif5">
-        <div class="mask" style="mask-image: url(/footer_pics/github_logo.png);animation-delay: 2s;"></div>
+        <div class="mask" style="mask-image: url(./public/footer_pics/github_logo.png);animation-delay: 2s;"></div>
       </a>
       <a target="_blank" title="leetcode" href="https://leetcode.com/u/mysterious_person/">
-        <div class="mask" style="mask-image: url(/footer_pics/leetcode_logo.png);animation-delay: 1s;"></div>
+        <div class="mask" style="mask-image: url(./public/footer_pics/leetcode_logo.png);animation-delay: 1s;"></div>
       </a>
     </footer>
   </body>
@@ -86,7 +86,7 @@
       window.setTimeout(showH1, 500);
       g_tvGif = document.getElementById("tvGif");
       g_tvGifImgHolder = new Image();
-      g_tvGifImgHolder.src = "/tvGifs/static.gif";
+      g_tvGifImgHolder.src = "./public/tvGifs/static.gif";
       g_textPopUpInfo[0] = document.getElementById("textPopUp");
       g_infoScreenInfo = [
         document.getElementById("infoScreen"),
@@ -95,7 +95,7 @@
         document.getElementById("infoScreenText")
       ];
 
-      fetch("/info.json")
+      fetch("./public/info.json")
       .then(res => res.json())
       .then(res => {
         g_projectsInfo = res["projects"];
@@ -169,7 +169,7 @@
         buttonEl.textContent = g_projectsInfo[i][0];
         if (g_projectsInfo[i].length > 1) {
           g_projectGifs.push(new Image());
-          g_projectGifs[i].src = `/tvGifs/${g_projectsInfo[i][1]}`;
+          g_projectGifs[i].src = `./public/tvGifs/${g_projectsInfo[i][1]}`;
           buttonEl.onmouseenter = () => mouseEnteredButton(i);
           buttonEl.onmouseleave = () => g_tvGif.src = g_tvGifImgHolder.src;
           if (g_projectsInfo[i].length === 4) buttonEl.onclick = () => buttonClicked(i);

@@ -1,7 +1,7 @@
 ### Uzair Arif's Portfolio
 
-update 1.2.0:
-- Hosting on github instead of vercel. Although `vercel dev` will still be used for development.
+update 1.2.0 - 1.2.1:
+- Hosting on github instead of vercel.
 
 update 1.1.0:
 - Improved layout for mobile responsiveness.
