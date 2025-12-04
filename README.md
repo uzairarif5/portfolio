@@ -1,5 +1,8 @@
 ### Uzair Arif's Portfolio
 
+update 1.2.2:
+- Added the `LAN Streaming` project.
+
 update 1.2.0 - 1.2.1:
 - Hosting on github instead of vercel.
 

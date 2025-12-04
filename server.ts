@@ -11,3 +11,5 @@ app.get('/info.json', (req, res) => res.sendFile('/info.json'));
 app.listen(port, () => console.log(`Portfolio on port ${port}`));
 
 export default app;
+
+//npx tsx server.ts
