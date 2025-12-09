@@ -411,7 +411,7 @@ body{
         #infoScreenInner{
           color: var(--text-color);
           font-family: "Aleo";
-          font-size: 16px;
+          font-size: 18px;
           line-height: 25px;
           left: 0;
           top: 0;
@@ -637,6 +637,10 @@ body{
               padding-top: 40px;
             }
           }
+        }
+
+        #infoScreen #infoScreenInner{
+          font-size: 16px;
         }
       }
     }

@@ -1,5 +1,9 @@
 ### Uzair Arif's Portfolio
 
+update 1.2.4:
+- Made changes in the top description.
+- Changed font size in #infoScreenInner.
+
 update 1.2.3:
 - Made small changes in my description.
 
