@@ -22,7 +22,7 @@
         <div id="screenText">
           Uzair Arif,<br/>
           <span></span><br style="display: none;"/><span></span>
-          <span class="caret">▐</span>
+          <span class="caret">▌</span>
           <span style="opacity: 0;">A hobbyist programmer (based in Canada) who enjoys experimenting with new architectures and ideas, with the emphasis on high performance and minimal complexity.</span><br/>
           <span style="opacity: 0;">Preferred languages: C, Python, JS/TS, Java, C++, R.</span>
           <div id="bottomMainScreen">
@@ -33,7 +33,7 @@
       </div>
       <div id="middleContent">
         <div id="floor"></div>
-        <div id="leftWall"></div>
+        <div id="leftWall"><div id="tvShadow"><div id="tvShadowLight"></div></div></div>
         <div id="rightWall"></div>
         <div id="tvContainer">
           <div id="tvDiv">
@@ -229,6 +229,7 @@
 
       window.setTimeout(() => {
         document.getElementById("scanlineContainer").style.opacity = "1";
+        document.getElementById("tvShadowLight").style.opacity = "0.5";
         addGlowParticlesToFooterButton();
       }, 1500);
     }

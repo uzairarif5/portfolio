@@ -29,8 +29,8 @@
 }
 
 @keyframes brightnessChange {
-  0% {box-shadow: rgba(255, 255, 255, 0.2) 0px 0px 40px 5px;}
-  100% {box-shadow: rgba(255, 255, 255, 0.4) 0px 0px 40px 5px;}
+  0% {box-shadow: rgba(255, 255, 255, 0.2) 0px 0px 50px 1px, rgba(255, 255, 255, 0.2) 0px 0px 15px 1px inset;}
+  100% {box-shadow: rgba(255, 255, 255, 0.4) 0px 0px 50px 1px, rgba(255, 255, 255, 0.4) 0px 0px 15px 1px inset;}
   
 }
 
@@ -225,6 +225,32 @@ body{
         mask-image: linear-gradient(to right, black, transparent 90%);
         transform: rotateY(90deg);
         transform-origin: left;
+
+        #tvShadow{
+          position: absolute;
+          border-radius: 10px;
+          left: -2%;
+          top: 25%;
+          width: 70%;
+          height: 50%;
+          background-color: black;
+          animation: float 2s ease-in-out infinite alternate;
+          box-shadow: rgba(0, 0, 0, 1) 0px 0px 20px 0px;
+          opacity: 0.4;
+
+          #tvShadowLight{
+            display: block;
+            border-radius: 10px;
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            left: 0;
+            top: 0;
+            animation: brightnessChange 2s infinite alternate;
+            transition: opacity 2s linear;
+            opacity: 0;
+          }
+        }
       }
       
       #rightWall{

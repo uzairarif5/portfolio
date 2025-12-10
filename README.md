@@ -1,5 +1,8 @@
 ### Uzair Arif's Portfolio
 
+update 1.3.0:
+- Added a shadow for the tv.
+
 update 1.2.4:
 - Made changes in the top description.
 - Changed font size in #infoScreenInner.

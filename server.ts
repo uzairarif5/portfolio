@@ -12,4 +12,4 @@ app.listen(port, () => console.log(`Portfolio on port ${port}`));
 
 export default app;
 
-//npx tsx server.ts
+// npx tsx server.ts
