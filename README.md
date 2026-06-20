@@ -1,5 +1,8 @@
 ### Uzair Arif's Portfolio
 
+update 1.4.0:
+- Added a method to "lock" projects. Unlocking method will be in a future update.
+
 update 1.3.0:
 - Added a shadow for the tv.
 

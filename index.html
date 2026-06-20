@@ -73,6 +73,7 @@
   <script>
     var g_counterForHideHeader = 2;
     var g_projectGifs = [];
+    var g_lockedProjects;
     var g_workExpInfo;
     var g_infoScreenInfo = [null, null, null, null];
     var g_textPopUpInfo = [null, null];
@@ -99,6 +100,7 @@
       .then(res => res.json())
       .then(res => {
         g_projectsInfo = res["projects"];
+        g_lockedProjects = new Set(res["locked_projects"]);
         g_workExpInfo = res["WorkExperienceInfo"];
         document.getElementById("bottomMainScreen").classList.add("visible");
         addButtonsToMain();
@@ -166,13 +168,19 @@
       for (let i = 0; i < g_projectsInfo.length; i++) {
         let buttonEl = document.createElement("button");
         buttonEl.type = "button";
-        buttonEl.textContent = g_projectsInfo[i][0];
-        if (g_projectsInfo[i].length > 1) {
-          g_projectGifs.push(new Image());
-          g_projectGifs[i].src = `./public/tvGifs/${g_projectsInfo[i][1]}`;
-          buttonEl.onmouseenter = () => mouseEnteredButton(i);
-          buttonEl.onmouseleave = () => g_tvGif.src = g_tvGifImgHolder.src;
-          if (g_projectsInfo[i].length === 4) buttonEl.onclick = () => buttonClicked(i);
+        g_projectGifs.push(new Image());
+        if (g_lockedProjects.has(g_projectsInfo[i][0])) {
+          buttonEl.textContent = "Locked 🔒";
+          buttonEl.classList.add("locked");
+        }
+        else {
+          buttonEl.textContent = g_projectsInfo[i][0];
+          if (g_projectsInfo[i].length == 4) {
+            g_projectGifs[i].src = `./public/tvGifs/${g_projectsInfo[i][1]}`;
+            buttonEl.onmouseenter = () => mouseEnteredButton(i);
+            buttonEl.onmouseleave = () => g_tvGif.src = g_tvGifImgHolder.src;
+            buttonEl.onclick = () => buttonClicked(i);
+          }
         }
         buttonsContainer.appendChild(buttonEl);
       }

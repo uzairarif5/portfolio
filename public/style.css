@@ -366,27 +366,26 @@ body{
             font-size: 20px;
             line-height: 35px;
             overflow-x: clip;
-            color: rgb(10, 40, 140);
+            color: transparent;
+            text-shadow: 0 0 0 rgb(10, 40, 140);
             background-color: var(--button-color);
             border: solid 2px rgba(0, 0, 0, 0.5);
             border-radius: 6px;
             outline: none;
             width: 65%;
-            cursor: pointer;
-            background-image: linear-gradient(
-              to top,
-              rgb(255, 255, 255, 0.2) 40%,
-              transparent 60%
-            );
+            opacity: 0.7;
+          }
+
+          button:not(.locked) {
+            background-image: linear-gradient(to top, rgb(255, 255, 255, 0.2) 40%, transparent 60%);
             background-size: 100% 3px;
             animation: scanlines 3s infinite linear;
-            opacity: 0.7;
+            cursor: pointer;
           
             &:hover{
               box-shadow: rgba(255, 255, 255, 0.5) 0px 0px 20px 0px;
               opacity: 1;
             }
-
           }
 
           .filler{
