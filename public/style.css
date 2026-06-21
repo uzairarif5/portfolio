@@ -130,6 +130,28 @@ body{
     overflow: hidden;
     position: relative;
 
+    #bugsContainer{
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100vh;
+      width: 100vw;
+      z-index: 3;
+      pointer-events: none;
+
+      .bugDiv {
+        background-image: url(./bug.gif);
+        background-size: cover;
+        width: 20px;
+        height: 20px;
+        position: absolute;
+        opacity: 0.9;
+        cursor: pointer;
+        pointer-events: all;
+        transition: linear 0.2s all;
+      }
+    }
+
     #mainScreen{
       padding: 10px 30px;
       color: var(--text-color);
@@ -373,10 +395,14 @@ body{
             border-radius: 6px;
             outline: none;
             width: 65%;
-            opacity: 0.7;
+          }
+
+          button.locked {
+            opacity: 0.6;
           }
 
           button:not(.locked) {
+            opacity: 0.7;
             background-image: linear-gradient(to top, rgb(255, 255, 255, 0.2) 40%, transparent 60%);
             background-size: 100% 3px;
             animation: scanlines 3s infinite linear;

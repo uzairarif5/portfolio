@@ -1,5 +1,8 @@
 ### Uzair Arif's Portfolio
 
+update 2.1.0:
+- Compeleted the bug kill feature.
+
 update 1.4.0:
 - Added a method to "lock" projects. Unlocking method will be in a future update.
 

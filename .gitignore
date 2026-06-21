@@ -3,3 +3,4 @@
 .vercel
 *.kra
 *~
+.DS_Store

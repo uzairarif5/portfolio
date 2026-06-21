@@ -18,6 +18,7 @@
       <img src="./public/fog1.png" alt="" class="fogImg"/>
     </header>
     <main>
+      <div id="bugsContainer"></div>
       <div id="mainScreen">
         <div id="screenText">
           Uzair Arif,<br/>
@@ -80,6 +81,8 @@
     var g_tvGif;
     var g_tvGifImgHolder;
     var g_projectsInfo;
+    var g_bugsToKill = 3;
+    var g_bugsKilled = 0;
     var g_particleStore = [];
 
     window.onload = () => {
@@ -106,6 +109,8 @@
         addButtonsToMain();
         g_counterForHideHeader -= 1;
         hideHeader();
+        window.setTimeout(createNewBug, 5000);
+        startBugLoop();
       });
 
       document.onkeydown = (event) => {
@@ -146,6 +151,85 @@
       }, 2000);
     }
 
+    function createNewBug() {
+      let newBug = document.createElement("div");
+      newBug.classList.add("bugDiv");
+      let startSide = Math.floor(Math.random()*100) % 4;
+      let xPos, yPos, rot;
+      switch (startSide) {
+        case 0: //top
+          xPos = Math.random() * document.getElementById("bugsContainer").offsetWidth;
+          yPos = -100;
+          rot = Math.PI/2 + "rad";
+          break;
+        case 1: //left
+          xPos = -100;
+          yPos = Math.random() * document.getElementById("bugsContainer").offsetHeight;
+          rot = "0rad";
+          break;
+        case 2: //bottom
+          xPos = Math.random() * document.getElementById("bugsContainer").offsetWidth;
+          yPos = document.getElementById("bugsContainer").offsetHeight + 100;
+          rot = (3 * Math.PI/2) + "rad";
+          break;
+        case 3: //right
+          xPos = document.getElementById("bugsContainer").offsetWidth + 100;
+          yPos = Math.random() * document.getElementById("bugsContainer").offsetHeight;
+          rot = Math.PI + "rad";
+          break;
+        default:
+          console.error("Unknown case reached in createNewBug():", startSide);
+      }
+      newBug.style.left = xPos + "px";
+      newBug.style.top = yPos + "px";
+      newBug.style.rotate = rot;
+      newBug.addEventListener("click", (event) => killBug(newBug, event.clientX, event.clientY));
+      document.getElementById("bugsContainer").appendChild(newBug);
+      window.setTimeout(() => removeBug(newBug), 50000);
+      window.setTimeout(createNewBug, 20000);
+    }
+
+    function startBugLoop() {
+      var bugIntv = window.setInterval(() =>{
+        for (const bugDiv of document.getElementById("bugsContainer").children) {
+          if (Math.random() < 0.1) {
+            const change = (Math.random() - 0.5)/5;
+            bugDiv.style.rotate = parseFloat(bugDiv.style.rotate) + change + "rad";
+          }
+          const rotAsFloat = parseFloat(bugDiv.style.rotate);
+          bugDiv.style.left = parseFloat(bugDiv.style.left) + Math.cos(rotAsFloat) + "px";
+          bugDiv.style.top = parseFloat(bugDiv.style.top) + Math.sin(rotAsFloat) + "px";
+        }
+      }, 50);
+    }
+
+    function killBug(bugDiv, x, y) {
+      g_bugsKilled++;
+      const text = "Killed " + g_bugsKilled + (g_bugsKilled == 1 ? " bug" : " bugs");
+      showTextPopUp(text, x, y);
+      const newTarget = g_bugsToKill - g_bugsKilled;
+      if (newTarget >= 0) document.querySelectorAll(".locked").forEach((el) => {
+        if (newTarget > 1) el.textContent = `[🔒] Kill ${newTarget} bugs to unlock`;
+        else if (newTarget == 1) el.textContent = `[🔒] Kill ${newTarget} bug to unlock`;
+        else {
+          let i = parseInt(el.getAttribute("data-num"));
+          el.textContent = g_projectsInfo[i][0];
+          g_projectGifs[i].src = `./public/tvGifs/${g_projectsInfo[i][1]}`;
+          el.onmouseenter = () => mouseEnteredButton(i);
+          el.onmouseleave = () => g_tvGif.src = g_tvGifImgHolder.src;
+          el.onclick = () => buttonClicked(i);
+          el.classList.remove("locked");
+        }
+      })
+      removeBug(bugDiv);
+    }
+
+    function removeBug(bugDiv) {
+      if (!bugDiv) return;
+      bugDiv.style.opacity = "0";
+      window.setTimeout(() => bugDiv.remove(), 300);
+    }
+
     function showWorkExp(){
       g_infoScreenInfo[1].removeAttribute("href");
       g_infoScreenInfo[2].textContent = "Work Experience";
@@ -170,8 +254,9 @@
         buttonEl.type = "button";
         g_projectGifs.push(new Image());
         if (g_lockedProjects.has(g_projectsInfo[i][0])) {
-          buttonEl.textContent = "Locked 🔒";
+          buttonEl.textContent = `[🔒] Kill ${g_bugsToKill} bugs to unlock`;
           buttonEl.classList.add("locked");
+          buttonEl.setAttribute("data-num", i);
         }
         else {
           buttonEl.textContent = g_projectsInfo[i][0];
