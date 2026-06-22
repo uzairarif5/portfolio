@@ -1,5 +1,8 @@
 ### Uzair Arif's Portfolio
 
+update 2.2.0:
+- Made CSS changes to textpopup box.
+
 update 2.1.0:
 - Compeleted the bug kill feature.
 
