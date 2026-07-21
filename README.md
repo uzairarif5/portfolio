@@ -1,5 +1,10 @@
 ### Uzair Arif's Portfolio
 
+Update command: `npm version x.x.x --git-tag-version false`.
+
+update 2.2.1:
+- Changed bug color.
+
 update 2.2.0:
 - Made CSS changes to textpopup box.
 

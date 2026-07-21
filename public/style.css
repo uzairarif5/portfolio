@@ -4,6 +4,7 @@
   --header-color: rgb(150, 192, 255);
   --text-color: rgb(150, 192, 255);
   --button-color: rgb(150, 192, 255);
+  --project-text-color: rgb(10, 40, 140);
 }
 
 @keyframes h1Shade{
@@ -140,12 +141,13 @@ body{
       pointer-events: none;
 
       .bugDiv {
-        background-image: url(./bug.gif);
-        background-size: cover;
+        background-color: #030e1d;
+        -webkit-mask-image: url(./bug.gif);
+        mask-image: url(./bug.gif);
+        mask-size: cover;
         width: 20px;
         height: 20px;
         position: absolute;
-        opacity: 0.9;
         cursor: pointer;
         pointer-events: all;
         transition: linear 0.2s all;
@@ -389,7 +391,7 @@ body{
             line-height: 35px;
             overflow-x: clip;
             color: transparent;
-            text-shadow: 0 0 0 rgb(10, 40, 140);
+            text-shadow: 0 0 0 var(--project-text-color);
             background-color: var(--button-color);
             border: solid 2px rgba(0, 0, 0, 0.5);
             border-radius: 6px;
