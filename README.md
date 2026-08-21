@@ -2,6 +2,9 @@
 
 Update command: `npm version x.x.x --git-tag-version false`.
 
+update 2.3.0:
+- Updated my work experience.
+
 update 2.2.1:
 - Changed bug color.
 
