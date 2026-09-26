@@ -66,8 +66,8 @@
       <a target="_blank" title="github" href="https://github.com/uzairarif5">
         <div class="mask" style="mask-image: url(./public/footer_pics/github_logo.png);animation-delay: 2s;"></div>
       </a>
-      <a target="_blank" title="leetcode" href="https://leetcode.com/u/mysterious_person/">
-        <div class="mask" style="mask-image: url(./public/footer_pics/leetcode_logo.png);animation-delay: 1s;"></div>
+      <a target="_blank" title="credly" href="https://www.credly.com/users/uzair-arif.908b0226">
+        <div class="mask" style="mask-image: url(./public/footer_pics/credly_logo.png);animation-delay: 1s;"></div>
       </a>
     </footer>
   </body>
@@ -183,7 +183,7 @@
       newBug.style.left = xPos + "px";
       newBug.style.top = yPos + "px";
       newBug.style.rotate = rot;
-      newBug.addEventListener("click", (event) => killBug(newBug, event.clientX, event.clientY));
+      newBug.addEventListener("click", (event) => killBug(newBug, event.pageX, event.pageY));
       document.getElementById("bugsContainer").appendChild(newBug);
       window.setTimeout(() => removeBug(newBug), 50000);
       window.setTimeout(createNewBug, 20000);
@@ -239,7 +239,7 @@
 
     function wantEmail(event){
       navigator.clipboard.writeText("uzair.99@hotmail.com");
-      showTextPopUp("Email copied to clipboard", event.clientX, event.clientY);
+      showTextPopUp("Email copied to clipboard", event.pageX, event.pageY);
     }
 
     function addButtonsToMain(){

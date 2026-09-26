@@ -2,6 +2,10 @@
 
 Update command: `npm version x.x.x --git-tag-version false`.
 
+update 2.4.0:
+- Replaced LeetCode button with Credly.
+- Bug fix: Popup text wasn't positioned properly.
+
 update 2.3.0:
 - Updated my work experience.
 
