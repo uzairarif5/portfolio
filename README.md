@@ -2,6 +2,9 @@
 
 Update command: `npm version x.x.x --git-tag-version false`.
 
+update 2.5.0:
+- Changed "Svelte Games" to "Simple Bits".
+
 update 2.4.0:
 - Replaced LeetCode button with Credly.
 - Bug fix: Popup text wasn't positioned properly.
