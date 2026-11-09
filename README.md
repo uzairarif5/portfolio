@@ -1,6 +1,11 @@
 ### Uzair Arif's Portfolio
 
+<!-- Reminder: Update SimpleBits video -->
+
 Update command: `npm version x.x.x --git-tag-version false`.
+
+update 2.5.1:
+- Changed "Simple Bits" to "Silicon Bits".
 
 update 2.5.0:
 - Changed "Svelte Games" to "Simple Bits".
