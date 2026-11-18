@@ -4,6 +4,9 @@
 
 Update command: `npm version x.x.x --git-tag-version false`.
 
+update 2.5.2:
+- Updated second Github username: "deriveitCreator" -> "TheMysteriousDeveloper0845".
+
 update 2.5.1:
 - Changed "Simple Bits" to "Silicon Bits".
 
